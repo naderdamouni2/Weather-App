@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
@@ -17,7 +16,6 @@ import com.example.weatherapp.model.ApiData
 import com.example.weatherapp.utils.ApiState
 import com.example.weatherapp.viewModel.WeatherViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
 
 @AndroidEntryPoint
 class WeatherListFragment : Fragment(R.layout.fragment_weather_list) {
@@ -39,6 +37,7 @@ class WeatherListFragment : Fragment(R.layout.fragment_weather_list) {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.show()
         (activity as AppCompatActivity).supportActionBar?.title = weatherViewModel.query
+
         setupObservers()
     }
 
@@ -56,7 +55,7 @@ class WeatherListFragment : Fragment(R.layout.fragment_weather_list) {
     }
 
     private fun getWeatherDetails(weather: ApiData) {
-        val action = WeatherListFragmentDirections.actionWeatherListFragmentToWeatherDetailsFragment(weather)
+        val action = WeatherListFragmentDirections.weatherListFragmentToWeatherDetailsFragment(weather)
         findNavController().navigate(action)
     }
 

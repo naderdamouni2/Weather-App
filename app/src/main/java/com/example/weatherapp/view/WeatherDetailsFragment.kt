@@ -5,13 +5,11 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentWeatherDetailsBinding
 import com.example.weatherapp.viewModel.WeatherViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
 import kotlin.math.roundToInt
 
 @AndroidEntryPoint

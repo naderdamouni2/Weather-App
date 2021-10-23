@@ -36,19 +36,11 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.hide()
+        (activity as AppCompatActivity).supportActionBar?.title = ""
 
         handleInputTextListener()
-        handleSearchCity()
-
-        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            weatherViewModel.queryState.collect { queryState ->
-                when (queryState) {
-                    QueryState.Success -> querySuccess()
-                    QueryState.Failure -> queryFailure()
-                    QueryState.Idle -> {}
-                }
-            }
-        }
+        handleSearchLookUp()
+        setupObservers()
     }
 
     override fun onDestroyView() {
@@ -56,7 +48,24 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         _binding = null
     }
 
-    private fun handleSearchCity() = with(binding) {
+    private fun setupObservers() = with(weatherViewModel) {
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            queryState.collect { queryState ->
+                    when (queryState) {
+                        QueryState.Success -> querySuccess()
+                        QueryState.Failure -> queryFailure()
+                        QueryState.Idle -> {}
+                    }
+            }
+        }
+    }
+
+    private fun querySuccess() {
+        val action = SearchFragmentDirections.searchFragmentToWeatherListFragment()
+        findNavController().navigate(action)
+    }
+
+    private fun handleSearchLookUp() = with(binding) {
         searchButton.setOnClickListener {
             weatherViewModel.query = inputText.text.toString()
         }
@@ -71,11 +80,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                     inputText.hint = ""
                 }
             }
-    }
-
-    private fun querySuccess() {
-        val action = SearchFragmentDirections.actionSearchFragmentToWeatherListFragment()
-        findNavController().navigate(action)
     }
 
     private fun queryFailure() {

@@ -11,7 +11,7 @@
         android:label="fragment_search"
         tools:layout="@layout/fragment_search">
         <action
-            android:id="@+id/action_searchFragment_to_weatherListFragment"
+            android:id="@+id/searchFragment_to_weatherListFragment"
             app:destination="@id/weatherListFragment" />
         <argument
             android:name="city"
@@ -25,9 +25,6 @@
         <argument
             android:name="details"
             app:argType="com.example.weatherapp.model.ApiData" />
-        <action
-            android:id="@+id/action_weatherDetailsFragment_to_weatherListFragment"
-            app:destination="@id/weatherListFragment" />
     </fragment>
     <fragment
         android:id="@+id/weatherListFragment"
@@ -35,10 +32,7 @@
         android:label="fragment_weather_list"
         tools:layout="@layout/fragment_weather_list">
         <action
-            android:id="@+id/action_weatherListFragment_to_weatherDetailsFragment"
+            android:id="@+id/weatherListFragment_to_weatherDetailsFragment"
             app:destination="@id/weatherDetailsFragment" />
-        <action
-            android:id="@+id/action_weatherListFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
     </fragment>
 </navigation>

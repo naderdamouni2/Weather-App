@@ -7,9 +7,11 @@ import com.example.weatherapp.utils.ApiState
 import com.example.weatherapp.utils.QueryState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,14 +28,15 @@ class WeatherViewModel @Inject constructor(
     var query = ""
         set(value) {
             getWeatherData(value)
-            field = value.capitalize()
+            field = value.replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+            }
         }
 
-    private fun getWeatherData(q: String) {
-        _weatherState.value = ApiState.Loading
+    private fun getWeatherData(city: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val weatherData = weatherRepo.getWeatherData(q)
+                val weatherData = weatherRepo.getWeatherData(city)
                 val state = if (weatherData.body() != null) {
                     _queryState.emit(QueryState.Success)
                     ApiState.Success(weatherData.body()!!)

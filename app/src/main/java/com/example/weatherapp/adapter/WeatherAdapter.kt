@@ -5,9 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.databinding.ItemWeatherBinding
 import com.example.weatherapp.model.ApiData
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
 import kotlin.math.roundToInt
 
 class WeatherAdapter(
