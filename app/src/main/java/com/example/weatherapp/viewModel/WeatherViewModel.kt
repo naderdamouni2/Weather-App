@@ -28,8 +28,12 @@ class WeatherViewModel @Inject constructor(
     var query = ""
         set(value) {
             getWeatherData(value)
-            field = value.replaceFirstChar {
-                if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+            field = value.split(' ').joinToString(" ") { word ->
+                word.replaceFirstChar {
+                    if (it.isLowerCase()) it.titlecase(
+                        Locale.getDefault()
+                    ) else it.toString()
+                }
             }
         }
 
