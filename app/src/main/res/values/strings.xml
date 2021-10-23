@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Weather App</string>
+    <string name="city_name">City Name</string>
+    <string name="lookup">Lookup</string>
+    <string name="_72">72</string>
+    <string name="feels_like_78">Feels Like: 78</string>
+    <string name="clouds">Clouds</string>
+    <string name="broken_clouds">Broken Clouds</string>
+    <string name="cloudy">Cloudy</string>
+    <string name="weather">weather</string>
+    <string name="temp">temp</string>
+    <string name="back">back</string>
+</resources>
